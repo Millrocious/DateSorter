@@ -1,8 +1,5 @@
-package sample;
-
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Marking will be based upon producing a readable, well engineered solution rather than factors
@@ -31,5 +28,23 @@ public class DateSorter {
      */
     public Collection<LocalDate> sortDates(List<LocalDate> unsortedDates) {
         // your solution here
+        List<LocalDate> withR = new ArrayList<>();
+        List<LocalDate> withoutR = new ArrayList<>();
+
+        for(LocalDate date : unsortedDates) {
+            if (date.getMonth().toString().toLowerCase().contains("r")) {
+                withR.add(date);
+            } else {
+                withoutR.add(date);
+            }
+        }
+
+        Collections.sort(withR);
+        withoutR.sort(Collections.reverseOrder());
+
+        List<LocalDate> sortedDates = new ArrayList<>(withR);
+        sortedDates.addAll(withoutR);
+
+        return sortedDates;
     }
 }
